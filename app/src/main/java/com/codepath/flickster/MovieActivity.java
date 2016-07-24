@@ -4,15 +4,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.codepath.flickster.models.Movie;
 import com.loopj.android.http.*;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 import cz.msebera.android.httpclient.Header;
 
 public class MovieActivity extends AppCompatActivity {
+
+    ArrayList<Movie> movies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +35,8 @@ public class MovieActivity extends AppCompatActivity {
                 // try-catch to handle null exceptions
                 try {
                     movieJsonResults = response.getJSONArray("results");
-                    Log.d("DEBUG", movieJsonResults.toString());
+                    movies = Movie.fromJSONArray(movieJsonResults);
+                    Log.d("DEBUG", movies.toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
