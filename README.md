@@ -1,7 +1,7 @@
 # Flickster
 CodePath Android Bootcamp Week 1 Project
 
-This is an Android demo application for displaying the latest box office movies using the [The Movie Database API](http://docs.themoviedb.apiary.io/). See the [Video Tutorial](http://courses.codepath.com/course_videos/intro_to_android/youtube/MW1yVzRdq5s*3Flist=PLrT2tZ9JRrf4jWZN7nIYHYYj7R8uE1jBu&index=0?title=video+walkthrough) on our cliffnotes for a step-by-step tutorial.
+This is an Android demo application for displaying the latest box office movies using the [The Movie Database API](http://docs.themoviedb.apiary.io/). See the [Video Tutorial](http://courses.codepath.com/course_videos/intro_to_android/youtube/MW1yVzRdq5s*3Flist=PLrT2tZ9JRrf4jWZN7nIYHYYj7R8uE1jBu&index=0?title=video+walkthrough) on CodePath's cliffnotes for a step-by-step tutorial.
 
 Time spent: 6 hours spent in total
 
