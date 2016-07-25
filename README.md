@@ -14,7 +14,7 @@ Walkthrough of all user stories:
 
 ![Portrait](http://i66.tinypic.com/300fubr.gif)
 
-![Landscape]http://i65.tinypic.com/2ik30d3.gif)
+![Landscape](http://i65.tinypic.com/2ik30d3.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
