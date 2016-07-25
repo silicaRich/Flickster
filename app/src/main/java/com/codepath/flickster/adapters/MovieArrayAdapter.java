@@ -21,6 +21,13 @@ import java.util.List;
  */
 public class MovieArrayAdapter extends ArrayAdapter<Movie> {
 
+    private static class ViewHolder {
+        TextView tvTitle;
+        TextView tvOverview;
+        ImageView ivImage;
+        ImageView ivBackDropImage;
+    }
+
     public MovieArrayAdapter(Context context, List<Movie> movies){
         super(context,android.R.layout.simple_list_item_1, movies);
     }
@@ -30,34 +37,41 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
         // Get the Data Item for this position
         Movie movie = getItem(position);
 
-        //Check the existing view being reused
+        // Check if an existing view is being reused, otherwise inflate the view
+        ViewHolder viewHolder; // view lookup cache stored in tag
         if (convertView == null){
+            // If there's no view to re-use, inflate a brand new view for row
+            viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.item_movie, parent, false);
+            // Populate title and overview for movie
+            viewHolder.tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
+            viewHolder.tvOverview = (TextView) convertView.findViewById(R.id.tvOverview);
+            // Cache the viewHolder object inside the fresh view
+            convertView.setTag(viewHolder);
+        } else {
+            // View is being recycled, retrieve the viewHolder object from tag
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
         // Find the Image View
         // Check orientation to determine which view to show :)
         int orientation = getContext().getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-            ImageView ivImage = (ImageView) convertView.findViewById(R.id.ivMovieImage);
-            ivImage.setImageResource(0); // clear out image from convertView
-            Picasso.with(getContext()).load(movie.getPosterPath()).into(ivImage); // Use Picasso library to load image into image view.
+            viewHolder.ivImage = (ImageView) convertView.findViewById(R.id.ivMovieImage);
+            viewHolder.ivImage.setImageResource(0); // clear out image from convertView
+            Picasso.with(getContext()).load(movie.getPosterPath()).into(viewHolder.ivImage); // Use Picasso library to load image into image view.
 
         } else if (orientation == Configuration.ORIENTATION_LANDSCAPE)
         {
-            ImageView ivBackDropImage = (ImageView) convertView.findViewById(R.id.ivMovieBackDropImage);
-            ivBackDropImage.setImageResource(0); // clear out image from convertView
-        Picasso.with(getContext()).load(movie.getBackdropPath()).into(ivBackDropImage); // Use Picasso library to load image into image view.
-    }
-
-        // Populate title and overview for movie
-        TextView tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
-        TextView tvOverview = (TextView) convertView.findViewById(R.id.tvOverview);
+            viewHolder.ivBackDropImage = (ImageView) convertView.findViewById(R.id.ivMovieBackDropImage);
+            viewHolder.ivBackDropImage.setImageResource(0); // clear out image from convertView
+            Picasso.with(getContext()).load(movie.getBackdropPath()).into(viewHolder.ivBackDropImage); // Use Picasso library to load image into image view.
+        }
 
         // Populate Data
-        tvTitle.setText(movie.getOriginalTitle());
-        tvOverview.setText(movie.getOverview());
+        viewHolder.tvTitle.setText(movie.getOriginalTitle());
+        viewHolder.tvOverview.setText(movie.getOverview());
 
 
         // Return the view
