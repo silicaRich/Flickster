@@ -12,9 +12,11 @@ Completed user stories:
  
 Walkthrough of all user stories:
 
-![Portrait](http://i66.tinypic.com/300fubr.gif)
+## Portrait View
+<img src='http://i66.tinypic.com/300fubr.gif' title='Portrait' width='200' alt='Portrait' /> 
 
-![Landscape](http://i65.tinypic.com/2ik30d3.gif)
+## Landscape View
+<img src='http://i65.tinypic.com/2ik30d3.gif' title='Landscape' width='200' alt='Landscape' /> 
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
