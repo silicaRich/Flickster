@@ -1,6 +1,8 @@
 package com.codepath.flickster.adapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +27,6 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         // Get the Data Item for this position
         Movie movie = getItem(position);
 
@@ -36,8 +37,19 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
         }
 
         // Find the Image View
-        ImageView ivImage = (ImageView) convertView.findViewById(R.id.ivMovieImage);
-        ivImage.setImageResource(0); // clear out image from convertView
+        // Check orientation to determine which view to show :)
+        int orientation = getContext().getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            ImageView ivImage = (ImageView) convertView.findViewById(R.id.ivMovieImage);
+            ivImage.setImageResource(0); // clear out image from convertView
+            Picasso.with(getContext()).load(movie.getPosterPath()).into(ivImage); // Use Picasso library to load image into image view.
+
+        } else if (orientation == Configuration.ORIENTATION_LANDSCAPE)
+        {
+            ImageView ivBackDropImage = (ImageView) convertView.findViewById(R.id.ivMovieBackDropImage);
+            ivBackDropImage.setImageResource(0); // clear out image from convertView
+        Picasso.with(getContext()).load(movie.getBackdropPath()).into(ivBackDropImage); // Use Picasso library to load image into image view.
+    }
 
         // Populate title and overview for movie
         TextView tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
@@ -47,7 +59,6 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
         tvTitle.setText(movie.getOriginalTitle());
         tvOverview.setText(movie.getOverview());
 
-        Picasso.with(getContext()).load(movie.getPosterPath()).into(ivImage); // Use Picasso library to load image into image view.
 
         // Return the view
         return convertView;
